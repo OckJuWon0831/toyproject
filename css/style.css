@@ -16,6 +16,11 @@
     display: none;
 }
 
+/* Hide the scrollbar */
+body::-webkit-scrollbar {
+    display: none;
+}
+
 /* Game Button  */
 .gameBtn {
     position: absolute;

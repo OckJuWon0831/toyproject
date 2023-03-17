@@ -33,8 +33,8 @@ function generateAssets() {
     const img = document.createElement('img');
     img.src = selectedImage;
     img.style.position = 'absolute';
-    img.style.left = `${x}px`;
-    img.style.bottom = `${y}px`;
+    img.style.left = `${x-20}px`;
+    img.style.bottom = `${y-20}px`;
     img.style.width = `100px`;
     img.style.height = `100px`;
     document.body.appendChild(img);
