@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.gameOnBtn {
+.gameBtn {
     position: absolute;
     padding: 20px;
     top: 50%;
@@ -23,11 +23,11 @@
     
 }
 
-.gameOnBtn:hover {
+.gameBtn:hover {
     background-color: darkgoldenrod;
 }
 
-.gameOnBtn:active {
+.gameBtn:active {
     box-shadow: 10px 5px 5px black;
 }
 
