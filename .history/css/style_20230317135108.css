@@ -1,0 +1,9 @@
+
+.gameSection {
+    
+}
+.gameStage {
+    box-sizing: border-box;
+    width: 1000px;
+    height: 1000px;
+}
