@@ -5,7 +5,9 @@ const gameStage = document.querySelector('.gameStage');
 const carrot = '\src\img\carrot.png';
 const bug = '\src\img\bug.png';
 const MAX_HEIGHT = Math.floor(window.innerHeight / 2);
-let TIME_SEC = 59;
+let TIME_SEC = 9;
+const backgroundMusic = new Audio('src/sound/bg.mp3');
+const gameWin = new Audio('src/sound/game_win.mp3');
 
 function isGameOver() {
     // Game over conditions:
@@ -20,23 +22,32 @@ function isGameOver() {
 
 // }
 
+function gameEndSound() {
+  backgroundMusic.pause();
+  gameWin.play();
+}
+
 function onTimer() {
   const intervalId = setInterval(() => {
-    const timeShow = TIME_SEC % 60;
+    timer.innerHTML = `<span>${TIME_SEC}</span>`;
     TIME_SEC--;
-    timer.innerHTML = `<span>${timeShow}</span>`;
     if (TIME_SEC < 0) {
       clearInterval(intervalId);
-      window.location.reload();
+      gameEndSound();
       alert("Game over!");
+      window.location.reload();
     }}, 1000);
 }
 
 function gameStart(e) {
     gameBtn.classList.add('hidden');
     timer.classList.remove('hidden');
-    onTimer();
-    isGameOver();
+    
+    // isGameOver();
 }
 
-gameBtn.addEventListener('click', gameStart);
+gameBtn.addEventListener('click', (event) => {
+  gameStart();
+  backgroundMusic.play();
+  onTimer();
+});
