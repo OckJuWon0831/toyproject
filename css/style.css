@@ -39,12 +39,10 @@
     box-shadow: 10px 5px 5px black;
 }
 
-/* Timer */
-.timer {
+.setting {
     position: absolute;
     z-index: 1;
     text-align: center;
-    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: black;
@@ -52,8 +50,26 @@
     padding: 20px;
     cursor: default;
 }
+
+/* Timer */
+.timer {
+    top: 10%;
+}
 .timer span {
     font-size: 50px;
     font-weight: bold;
     color: white;
+}
+
+/* Score */
+.score {
+    top: 30%;
+    background-color: bisque;
+}
+
+.score span {
+    font-size: 100px;
+    font-weight: lighter;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: brown;
 }

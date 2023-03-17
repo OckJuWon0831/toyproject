@@ -1,11 +1,12 @@
 const gameBtn = document.querySelector('.gameBtn');
 const timer = document.querySelector('.timer');
+const score = document.querySelector('.score');
 const gameStage = document.querySelector('.gameStage');
 
 const carrot = '\src\img\carrot.png';
 const bug = '\src\img\bug.png';
 const MAX_HEIGHT = Math.floor(window.innerHeight / 2);
-let TIME_SEC = 9;
+let TIME_SEC = 59;
 const backgroundMusic = new Audio('src/sound/bg.mp3');
 const gameWin = new Audio('src/sound/game_win.mp3');
 
@@ -16,11 +17,6 @@ function isGameOver() {
     // 2. when the player kills any carrot => you lose!
 }
 
-// // Until 10, generate random bug and carrot generating numbers
-// function generateNumber() {
-//     const bugNum = Math.floor(Math.random() * (max - min + 1) + min);
-
-// }
 
 function gameEndSound() {
   backgroundMusic.pause();
@@ -29,7 +25,7 @@ function gameEndSound() {
 
 function onTimer() {
   const intervalId = setInterval(() => {
-    timer.innerHTML = `<span>${TIME_SEC}</span>`;
+    timer.innerHTML = `<span>${TIME_SEC}s</span>`;
     TIME_SEC--;
     if (TIME_SEC < 0) {
       clearInterval(intervalId);
@@ -42,7 +38,7 @@ function onTimer() {
 function gameStart(e) {
     gameBtn.classList.add('hidden');
     timer.classList.remove('hidden');
-    
+    score.classList.remove('hidden');
     // isGameOver();
 }
 
