@@ -1,16 +1,19 @@
 
 .gameSection {
     display: flex;
+    flex-direction: column;
     margin: 0;
     width: auto;
     height: 100vh;
     position: relative;
 }
-
 .gameStage img{
     position: absolute;
     width: 100%;
     height: 100%;
+}
+.hidden {
+    display: none;
 }
 
 /* Game Button  */
@@ -29,23 +32,18 @@
     background-color: orange;
     
 }
-
 .gameBtn:hover {
     background-color: darkgoldenrod;
 }
-
 .gameBtn:active {
     box-shadow: 10px 5px 5px black;
-}
-
-.hidden {
-    display: none;
 }
 
 /* Timer */
 .timer {
     position: absolute;
     z-index: 1;
+    text-align: center;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -54,8 +52,7 @@
     padding: 20px;
     cursor: default;
 }
-
-span {
+.timer span {
     font-size: 50px;
     font-weight: bold;
     color: white;

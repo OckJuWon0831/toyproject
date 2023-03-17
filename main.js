@@ -24,9 +24,7 @@ function onTimer() {
   const intervalId = setInterval(() => {
     const timeShow = TIME_SEC % 60;
     TIME_SEC--;
-    // Update timer
     timer.innerHTML = `<span>${timeShow}</span>`;
-    // When timer is done, pause intervalId with clearInterval
     if (TIME_SEC < 0) {
       clearInterval(intervalId);
       window.location.reload();
@@ -35,7 +33,6 @@ function onTimer() {
 }
 
 function gameStart(e) {
-    // Game start!
     gameBtn.classList.add('hidden');
     timer.classList.remove('hidden');
     onTimer();
