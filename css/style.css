@@ -7,6 +7,13 @@
     position: relative;
 }
 
+.gameStage img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Game Button  */
 .gameBtn {
     position: absolute;
     padding: 20px;
@@ -35,8 +42,21 @@
     display: none;
 }
 
-.gameStage img{
+/* Timer */
+.timer {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    z-index: 1;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    border-radius: 2rem;
+    padding: 20px;
+    cursor: default;
+}
+
+span {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
 }
