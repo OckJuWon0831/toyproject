@@ -2,18 +2,19 @@ const gameBtn = document.querySelector('.gameBtn');
 const timer = document.querySelector('.timer');
 const score = document.querySelector('.score');
 const gameStage = document.querySelector('.gameStage');
-
 const carrot = 'src/img/carrot.png';
 const bug = 'src/img/bug.png';
-const MAX_HEIGHT = Math.floor(window.innerHeight / 2);
-let TIME_SEC = 59;
-let scoreNum = 0;
 const backgroundMusic = new Audio('src/sound/bg.mp3');
 const carrotPullMusic = new Audio('src/sound/carrot_pull.mp3');
 const bugPullMusic = new Audio('src/sound/bug_pull.mp3');
 const gameWin = new Audio('src/sound/game_win.mp3');
+const MAX_HEIGHT = Math.floor(window.innerHeight / 2);
+let TIME_SEC = 59;
+let SCORE_NUM = 0;
 
 function isGameOver() {
+  backgroundMusic.pause();
+  gameWin.play();
   alert("Game over!");
   window.location.reload();
 }
@@ -31,16 +32,16 @@ function clickAsset(event) {
     if(childNodeKey === 'carrot') {
       gameStage.removeChild(childNode);
       carrotPullMusic.play();
-      scoreNum++;
+      SCORE_NUM++;
     }
     else if(childNodeKey === 'bug') {
       gameStage.removeChild(childNode);
       bugPullMusic.play();
-      scoreNum--;
+      SCORE_NUM--;
     }
   }
-  score.innerHTML = score.innerHTML = `<span>${scoreNum}</span>`;
-  if(scoreNum < 0) {
+  score.innerHTML = score.innerHTML = `<span>${SCORE_NUM}</span>`;
+  if(SCORE_NUM < 0) {
     score.innerHTML = score.innerHTML = `<span>You Lose!</span>`;
     isGameOver();
   }
@@ -61,7 +62,6 @@ function generateAssets() {
 
     const img = document.createElement('img');
     img.src = selectedImage;
-
     img.setAttribute('alt', randomNumber === 0 ? 'bug' : 'carrot'); 
     img.style.position = 'absolute';
     img.style.left = `${x}px`;
@@ -70,15 +70,6 @@ function generateAssets() {
     img.style.height = `90px`;
     gameStage.appendChild(img);
   }
-
-  gameStage.addEventListener('click', (event) => {
-    clickAsset(event);
-  })
-}
-
-function gameEndSound() {
-  backgroundMusic.pause();
-  gameWin.play();
 }
 
 function onTimer() {
@@ -87,7 +78,6 @@ function onTimer() {
     TIME_SEC--;
     if (TIME_SEC < 0) {
       clearInterval(intervalId);
-      gameEndSound();
       isGameOver();
     }}, 1000);
 }
@@ -97,6 +87,9 @@ function gameStart(e) {
     timer.classList.remove('hidden');
     score.classList.remove('hidden');
     generateAssets();
+    gameStage.addEventListener('click', (event) => {
+      clickAsset(event);
+    })
 }
 
 gameBtn.addEventListener('click', (event) => {
