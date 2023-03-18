@@ -7,7 +7,7 @@
     height: 100vh;
     position: relative;
 }
-.gameStage img{
+.gameSection img{
     position: absolute;
     width: 100%;
     height: 100%;

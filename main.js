@@ -17,6 +17,19 @@ function isGameOver() {
     // 2. when the player kills any carrot => you lose!
 }
 
+// Target the carrot, when the click event is listened, it will be gone and update score
+function clickAsset(event) {
+  const childNode = event.target;
+
+  const {left, bottom} = childNode.getBoundingClientRect();
+  const x = event.clientX - left;
+  const y = bottom - event.clientY;
+
+  if(x <= 90 && y <= 90) {
+    gameStage.removeChild(childNode);
+  }
+}
+
 // For generating a number of bugs/carrots 
 function generateRanNumber(min = 20, max = 30) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -33,12 +46,16 @@ function generateAssets() {
     const img = document.createElement('img');
     img.src = selectedImage;
     img.style.position = 'absolute';
-    img.style.left = `${x-20}px`;
-    img.style.bottom = `${y-20}px`;
-    img.style.width = `100px`;
-    img.style.height = `100px`;
-    document.body.appendChild(img);
+    img.style.left = `${x}px`;
+    img.style.bottom = `${y}px`;
+    img.style.width = `90px`;
+    img.style.height = `90px`;
+    gameStage.appendChild(img);
   }
+
+  gameStage.addEventListener('click', (event) => {
+    clickAsset(event);
+  })
 }
 
 function gameEndSound() {
