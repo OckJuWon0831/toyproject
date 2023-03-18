@@ -7,7 +7,10 @@ const carrot = 'src/img/carrot.png';
 const bug = 'src/img/bug.png';
 const MAX_HEIGHT = Math.floor(window.innerHeight / 2);
 let TIME_SEC = 59;
+let scoreNum = 0;
 const backgroundMusic = new Audio('src/sound/bg.mp3');
+const carrotPullMusic = new Audio('src/sound/carrot_pull.mp3');
+const bugPullMusic = new Audio('src/sound/bug_pull.mp3');
 const gameWin = new Audio('src/sound/game_win.mp3');
 
 function isGameOver() {
@@ -20,16 +23,27 @@ function isGameOver() {
 // Target the carrot, when the click event is listened, it will be gone and update score
 function clickAsset(event) {
   const childNode = event.target;
-
+  const childNodeKey = event.srcElement.alt;
   const {left, bottom} = childNode.getBoundingClientRect();
   const x = event.clientX - left;
   const y = bottom - event.clientY;
 
+  // Considering width and height of the asset, the target boundary is set
   if(x <= 90 && y <= 90) {
-    gameStage.removeChild(childNode);
+    if(childNodeKey === 'carrot') {
+      gameStage.removeChild(childNode);
+      carrotPullMusic.play();
+      scoreNum++;
+    }
+    else if(childNodeKey === 'bug') {
+      gameStage.removeChild(childNode);
+      bugPullMusic.play();
+      scoreNum--;
+    }
   }
+  score.innerHTML = score.innerHTML = `<span>${scoreNum}</span>`;
 }
-
+    
 // For generating a number of bugs/carrots 
 function generateRanNumber(min = 20, max = 30) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -38,13 +52,15 @@ function generateRanNumber(min = 20, max = 30) {
 function generateAssets() {
   const images = [bug, carrot];
   for (let i = 0; i < generateRanNumber(); i++) { 
-    const randomNumber = Math.floor(Math.random() * 2); 
+    const randomNumber = Math.floor(Math.random() * 2); // 0 or 1
     const x = Math.floor(Math.random() * document.documentElement.clientWidth);
     const y = (Math.floor(Math.random() * document.documentElement.clientHeight))/2;
     const selectedImage = images[randomNumber];
 
     const img = document.createElement('img');
     img.src = selectedImage;
+
+    img.setAttribute('alt', randomNumber === 0 ? 'bug' : 'carrot'); 
     img.style.position = 'absolute';
     img.style.left = `${x}px`;
     img.style.bottom = `${y}px`;
