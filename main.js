@@ -14,10 +14,8 @@ const bugPullMusic = new Audio('src/sound/bug_pull.mp3');
 const gameWin = new Audio('src/sound/game_win.mp3');
 
 function isGameOver() {
-    // Game over conditions:
-    // 1. when the player kills all the bugs => you win!
-    
-    // 2. when the player kills any carrot => you lose!
+  alert("Game over!");
+  window.location.reload();
 }
 
 // Target the carrot, when the click event is listened, it will be gone and update score
@@ -42,6 +40,10 @@ function clickAsset(event) {
     }
   }
   score.innerHTML = score.innerHTML = `<span>${scoreNum}</span>`;
+  if(scoreNum < 0) {
+    score.innerHTML = score.innerHTML = `<span>You Lose!</span>`;
+    isGameOver();
+  }
 }
     
 // For generating a number of bugs/carrots 
@@ -86,8 +88,7 @@ function onTimer() {
     if (TIME_SEC < 0) {
       clearInterval(intervalId);
       gameEndSound();
-      alert("Game over!");
-      window.location.reload();
+      isGameOver();
     }}, 1000);
 }
 
@@ -96,7 +97,6 @@ function gameStart(e) {
     timer.classList.remove('hidden');
     score.classList.remove('hidden');
     generateAssets();
-    // isGameOver();
 }
 
 gameBtn.addEventListener('click', (event) => {
