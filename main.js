@@ -15,7 +15,8 @@ let SCORE_NUM = 0;
 function isGameOver() {
   backgroundMusic.pause();
   gameWin.play();
-  alert("Game over!");
+  alert("Game over!")
+  alert(`Score: ${SCORE_NUM}`);
   window.location.reload();
 }
 
