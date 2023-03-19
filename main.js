@@ -106,13 +106,12 @@ function gameStart(e) {
 }
 
 gameBtn.addEventListener('click', (event) => {
-  gameStart();
+  gameStart(event);
   backgroundMusic.play();
   onTimer();
 });
 
 gameStage.addEventListener('click', (event) => {
   clickAsset(event);
-
 })
 
