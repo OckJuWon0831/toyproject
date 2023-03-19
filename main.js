@@ -11,13 +11,20 @@ const gameWin = new Audio('src/sound/game_win.mp3');
 const MAX_HEIGHT = Math.floor(window.innerHeight / 2);
 let TIME_SEC = 59;
 let SCORE_NUM = 0;
+let CARROT_NUM = 0;
 
-function isGameOver() {
+function gameOver() {
   backgroundMusic.pause();
   gameWin.play();
   alert("Game over!")
   alert(`Score: ${SCORE_NUM}`);
   window.location.reload();
+}
+
+function claerAssets() {
+  while ( gameStage.hasChildNodes() ){
+    gameStage.removeChild( gameStage.firstChild );     
+    }  
 }
 
 // Target the carrot, when the click event is listened, it will be gone and update score
@@ -34,6 +41,12 @@ function clickAsset(event) {
       gameStage.removeChild(childNode);
       carrotPullMusic.play();
       SCORE_NUM++;
+      CARROT_NUM--;
+      if(CARROT_NUM === 0) {
+        claerAssets();
+        generateAssets();
+        console.log(CARROT_NUM);
+      } 
     }
     else if(childNodeKey === 'bug') {
       gameStage.removeChild(childNode);
@@ -44,7 +57,7 @@ function clickAsset(event) {
   score.innerHTML = score.innerHTML = `<span>${SCORE_NUM}</span>`;
   if(SCORE_NUM < 0) {
     score.innerHTML = score.innerHTML = `<span>You Lose!</span>`;
-    isGameOver();
+    gameOver();
   }
 }
     
@@ -55,8 +68,10 @@ function generateRanNumber(min = 20, max = 30) {
 
 function generateAssets() {
   const images = [bug, carrot];
+  // generating carrot
   for (let i = 0; i < generateRanNumber(); i++) { 
     const randomNumber = Math.floor(Math.random() * 2); // 0 or 1
+    if(randomNumber === 1) CARROT_NUM++; 
     const x = Math.floor(Math.random() * document.documentElement.clientWidth);
     const y = document.documentElement.clientHeight - (Math.floor(Math.random() * document.documentElement.clientHeight))/2;
     const selectedImage = images[randomNumber];
@@ -79,7 +94,7 @@ function onTimer() {
     TIME_SEC--;
     if (TIME_SEC < 0) {
       clearInterval(intervalId);
-      isGameOver();
+      gameOver();
     }}, 1000);
 }
 
@@ -88,9 +103,6 @@ function gameStart(e) {
     timer.classList.remove('hidden');
     score.classList.remove('hidden');
     generateAssets();
-    gameStage.addEventListener('click', (event) => {
-      clickAsset(event);
-    })
 }
 
 gameBtn.addEventListener('click', (event) => {
@@ -98,3 +110,9 @@ gameBtn.addEventListener('click', (event) => {
   backgroundMusic.play();
   onTimer();
 });
+
+gameStage.addEventListener('click', (event) => {
+  clickAsset(event);
+
+})
+

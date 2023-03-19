@@ -84,3 +84,13 @@ html, body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: brown;
 }
+
+/* Game stage */
+.gameStage img {
+    cursor: pointer;
+}
+
+.gameStage img:hover {
+    transform:scale(1.2, 1.2);  
+    transition: transform.0.5s;  
+}
