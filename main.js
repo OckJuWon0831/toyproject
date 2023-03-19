@@ -58,15 +58,15 @@ function generateAssets() {
   for (let i = 0; i < generateRanNumber(); i++) { 
     const randomNumber = Math.floor(Math.random() * 2); // 0 or 1
     const x = Math.floor(Math.random() * document.documentElement.clientWidth);
-    const y = (Math.floor(Math.random() * document.documentElement.clientHeight))/2;
+    const y = document.documentElement.clientHeight - (Math.floor(Math.random() * document.documentElement.clientHeight))/2;
     const selectedImage = images[randomNumber];
 
     const img = document.createElement('img');
     img.src = selectedImage;
     img.setAttribute('alt', randomNumber === 0 ? 'bug' : 'carrot'); 
     img.style.position = 'absolute';
-    img.style.left = `${x}px`;
-    img.style.bottom = `${y}px`;
+    img.style.left = `${x-90}px`;
+    img.style.top = `${y-90}px`;
     img.style.width = `90px`;
     img.style.height = `90px`;
     gameStage.appendChild(img);
