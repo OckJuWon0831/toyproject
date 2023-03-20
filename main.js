@@ -3,6 +3,7 @@ const timer = document.querySelector('.timer');
 const score = document.querySelector('.score');
 const gameHelper = document.querySelector('.gameHelper');
 const gameStage = document.querySelector('.gameStage');
+const gamePause = document.querySelector('.gamePause');
 const carrot = 'src/img/carrot.png';
 const bug = 'src/img/bug.png';
 const backgroundMusic = new Audio('src/sound/bg.mp3');
@@ -13,12 +14,16 @@ const MAX_HEIGHT = Math.floor(window.innerHeight / 2);
 let TIME_SEC = 59;
 let SCORE_NUM = 0;
 let CARROT_NUM = 0;
+let IS_GAME_ON;
 
 function gameOver() {
   backgroundMusic.pause();
   gameWin.play();
   alert("Game over!")
-  alert(`Score: ${SCORE_NUM}`);
+  if(SCORE_NUM < 0) {
+    alert(`You lose...`);
+  } 
+  else alert(`Score: ${SCORE_NUM}`);
   window.location.reload();
 }
 
@@ -26,6 +31,14 @@ function claerAssets() {
   while ( gameStage.hasChildNodes() ){
     gameStage.removeChild( gameStage.firstChild );     
   }  
+}
+
+function updateScore() {
+  score.innerHTML = score.innerHTML = `<span>Score: ${SCORE_NUM}</span>`;
+  if(SCORE_NUM < 0) {
+    score.innerHTML = score.innerHTML = `<span>You Lose!</span>`;
+    gameOver();
+  }
 }
 
 // Target the carrot, when the click event is listened, it will be gone and update score
@@ -54,11 +67,7 @@ function clickAsset(event) {
       SCORE_NUM--;
     }
   }
-  score.innerHTML = score.innerHTML = `<span>Score: ${SCORE_NUM}</span>`;
-  if(SCORE_NUM < 0) {
-    score.innerHTML = score.innerHTML = `<span>You Lose!</span>`;
-    gameOver();
-  }
+  updateScore();
 }
     
 // For generating a number of bugs/carrots 
@@ -90,26 +99,41 @@ function generateAssets() {
 
 function onTimer() {
   const intervalId = setInterval(() => {
+    if(IS_GAME_ON === true) {
     timer.innerHTML = `<span>${TIME_SEC}s</span>`;
     TIME_SEC--;
     if (TIME_SEC < 0) {
       clearInterval(intervalId);
       gameOver();
-    }}, 1000);
+    }}}, 1000);
 }
 
-function gameStart(e) {
+function gameStart() {
+    IS_GAME_ON = true;
     gameBtn.classList.add('hidden');
     gameHelper.classList.remove('hidden');
     generateAssets();
 }
 
-gameBtn.addEventListener('click', (event) => {
-  gameStart(event);
+gameBtn.addEventListener('click', () => {
+  gameStart();
   backgroundMusic.play();
   onTimer();
 });
 
 gameStage.addEventListener('click', (event) => {
   clickAsset(event);
+})
+
+gamePause.addEventListener('click', () => {
+  if(IS_GAME_ON === false) {
+    IS_GAME_ON = true;
+    backgroundMusic.play();
+    gameStage.classList.remove('hidden');
+  }
+  else {
+    IS_GAME_ON = false;
+    backgroundMusic.pause();
+    gameStage.classList.add('hidden');
+  }
 })
