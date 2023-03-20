@@ -37,7 +37,7 @@ function clickAsset(event) {
   const y = bottom - event.clientY;
 
   // Considering width and height of the asset, the target boundary is set
-  if(x <= 90 && y <= 90) {
+  if(x <= 100 && y <= 100) {
     if(childNodeKey === 'carrot') {
       gameStage.removeChild(childNode);
       carrotPullMusic.play();
@@ -113,4 +113,3 @@ gameBtn.addEventListener('click', (event) => {
 gameStage.addEventListener('click', (event) => {
   clickAsset(event);
 })
-
