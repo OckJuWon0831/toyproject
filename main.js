@@ -4,6 +4,8 @@ const score = document.querySelector('.score');
 const gameHelper = document.querySelector('.gameHelper');
 const gameStage = document.querySelector('.gameStage');
 const gamePause = document.querySelector('.gamePause');
+const startIcon = document.querySelector('.fa-play');
+const pauseIcon = document.querySelector('.fa-pause');
 const carrot = 'src/img/carrot.png';
 const bug = 'src/img/bug.png';
 const backgroundMusic = new Audio('src/sound/bg.mp3');
@@ -129,11 +131,14 @@ gamePause.addEventListener('click', () => {
   if(IS_GAME_ON === false) {
     IS_GAME_ON = true;
     backgroundMusic.play();
-    gameStage.classList.remove('hidden');
+    gamePause.removeChild(pauseIcon);
+    gamePause.appendChild(startIcon);
   }
   else {
     IS_GAME_ON = false;
     backgroundMusic.pause();
-    gameStage.classList.add('hidden');
+    gamePause.removeChild(startIcon);
+    gamePause.appendChild(pauseIcon);
   }
+  gameStage.classList.toggle('hidden');
 })
