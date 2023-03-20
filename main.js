@@ -1,6 +1,7 @@
 const gameBtn = document.querySelector('.gameBtn');
 const timer = document.querySelector('.timer');
 const score = document.querySelector('.score');
+const gameHelper = document.querySelector('.gameHelper');
 const gameStage = document.querySelector('.gameStage');
 const carrot = 'src/img/carrot.png';
 const bug = 'src/img/bug.png';
@@ -24,7 +25,7 @@ function gameOver() {
 function claerAssets() {
   while ( gameStage.hasChildNodes() ){
     gameStage.removeChild( gameStage.firstChild );     
-    }  
+  }  
 }
 
 // Target the carrot, when the click event is listened, it will be gone and update score
@@ -45,7 +46,6 @@ function clickAsset(event) {
       if(CARROT_NUM === 0) {
         claerAssets();
         generateAssets();
-        console.log(CARROT_NUM);
       } 
     }
     else if(childNodeKey === 'bug') {
@@ -54,7 +54,7 @@ function clickAsset(event) {
       SCORE_NUM--;
     }
   }
-  score.innerHTML = score.innerHTML = `<span>${SCORE_NUM}</span>`;
+  score.innerHTML = score.innerHTML = `<span>Score: ${SCORE_NUM}</span>`;
   if(SCORE_NUM < 0) {
     score.innerHTML = score.innerHTML = `<span>You Lose!</span>`;
     gameOver();
@@ -80,8 +80,8 @@ function generateAssets() {
     img.src = selectedImage;
     img.setAttribute('alt', randomNumber === 0 ? 'bug' : 'carrot'); 
     img.style.position = 'absolute';
-    img.style.left = `${x-90}px`;
-    img.style.top = `${y-90}px`;
+    img.style.left = `${x-45}px`;
+    img.style.top = `${y-80}px`;
     img.style.width = `90px`;
     img.style.height = `90px`;
     gameStage.appendChild(img);
@@ -100,8 +100,7 @@ function onTimer() {
 
 function gameStart(e) {
     gameBtn.classList.add('hidden');
-    timer.classList.remove('hidden');
-    score.classList.remove('hidden');
+    gameHelper.classList.remove('hidden');
     generateAssets();
 }
 

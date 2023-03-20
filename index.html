@@ -16,10 +16,17 @@
   <body>
     <section class="gameSection">
       <button class="gameBtn">Get on!</button>
-      <div class="timer setting hidden"><span>Start!</span></div>
-      <div class="score setting hidden"><span>0</span></div>
+      <div class="gameHelper hidden" id="setting">
+        <div class="timer"><span>Start!</span></div>
+        <div class="score"><span>Score: 0</span></div>
+        <div class="gamePause"><i class="fas fa-play"></i></div>
+      </div>
       <img src="src/img/background.png" alt="background img for game" />
       <div class="gameStage"></div>
+      <script
+        src="https://kit.fontawesome.com/5bebba3589.js"
+        crossorigin="anonymous"
+      ></script>
     </section>
   </body>
 </html>

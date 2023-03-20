@@ -4,10 +4,8 @@ html, body {
     padding: 0;
     overflow: hidden;
 }
-  
+
 .gameSection {
-    display: flex;
-    flex-direction: column;
     margin: 0;
     width: auto;
     height: 100vh;
@@ -21,10 +19,6 @@ html, body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.hidden {
-    display: none;
 }
 
 /* Game Button  */
@@ -50,36 +44,66 @@ html, body {
     box-shadow: 10px 5px 5px black;
 }
 
-.setting {
+/* Game Helper */
+#setting {
     position: absolute;
     z-index: 1;
-    text-align: center;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: black;
+}
+
+.gameHelper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+    background-color: beige;
     border-radius: 2rem;
-    padding: 20px;
-    cursor: default;
+    width: 500px;
+}
+
+.hidden {
+    display: none;
+}
+
+.gamePause {
+    top: 40%;
+    cursor: pointer;
+    font-size: 80px;
+    margin: 10px;
+}
+
+.gamePause:hover {
+    color: red;   
 }
 
 /* Timer */
 .timer {
     top: 10%;
+    background-color: black;
+    border-radius: 2rem;
+    padding: 20px;
+    margin: 10px;
 }
 .timer span {
-    font-size: 50px;
+    font-size: 70px;
     font-weight: bold;
     color: white;
 }
 
 /* Score */
 .score {
-    top: 30%;
+    top: 25%;
+    padding: 10px;
     background-color: bisque;
+    border: 0.5rem solid;
+    border-radius: 1rem;
+    margin: 10px;
 }
 
 .score span {
-    font-size: 100px;
+    font-size: 70px;
     font-weight: lighter;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: brown;
@@ -88,9 +112,11 @@ html, body {
 /* Game stage */
 .gameStage img {
     cursor: pointer;
+    z-index: 2;
 }
 
 .gameStage img:hover {
     transform:scale(1.2, 1.2);  
     transition: transform.0.5s;  
 }
+
