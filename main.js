@@ -1,3 +1,5 @@
+'use strict';
+
 const gameBtn = document.querySelector('.gameBtn');
 const timer = document.querySelector('.timer');
 const score = document.querySelector('.score');
@@ -25,12 +27,16 @@ function gameOver() {
   if(SCORE_NUM < 0) {
     alert(`You lose...`);
   } 
+  else if(SCORE_NUM > 100) {
+    alert(`★★ You Win !!! ★★`); 
+    alert(`Score: ${SCORE_NUM}`);
+  }
   else alert(`Score: ${SCORE_NUM}`);
   window.location.reload();
 }
 
 function claerAssets() {
-  while ( gameStage.hasChildNodes() ){
+  while (gameStage.hasChildNodes()){
     gameStage.removeChild( gameStage.firstChild );     
   }  
 }
@@ -38,7 +44,7 @@ function claerAssets() {
 function updateScore() {
   score.innerHTML = score.innerHTML = `<span>Score: ${SCORE_NUM}</span>`;
   if(SCORE_NUM < 0) {
-    score.innerHTML = score.innerHTML = `<span>You Lose!</span>`;
+    score.innerHTML = `<span>You Lose!</span>`;
     gameOver();
   }
 }
@@ -72,21 +78,19 @@ function clickAsset(event) {
   updateScore();
 }
     
-// For generating a number of bugs/carrots 
+// For generating a total number of bugs/carrots 
 function generateRanNumber(min = 20, max = 30) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function generateAssets() {
   const images = [bug, carrot];
-  // generating carrot
   for (let i = 0; i < generateRanNumber(); i++) { 
-    const randomNumber = Math.floor(Math.random() * 2); // 0 or 1
+    const randomNumber = Math.floor(Math.random() * 2); // Bug or Carrot
     if(randomNumber === 1) CARROT_NUM++; 
     const x = Math.floor(Math.random() * document.documentElement.clientWidth);
     const y = document.documentElement.clientHeight - (Math.floor(Math.random() * document.documentElement.clientHeight))/2;
     const selectedImage = images[randomNumber];
-
     const img = document.createElement('img');
     img.src = selectedImage;
     img.setAttribute('alt', randomNumber === 0 ? 'bug' : 'carrot'); 
