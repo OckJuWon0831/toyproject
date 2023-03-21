@@ -1,5 +1,4 @@
 # ToyProjct
-
 ## Vanila Javascript, HTML + CSS
 
 ---
