@@ -1,6 +1,6 @@
 # ToyProjct - Game
-## Grab the carrots but not the bugs!
-## Vanila Javascript, HTML + CSS
+Grab the carrots but not the bugs!
+Vanila Javascript, HTML + CSS
 
 ---
 
