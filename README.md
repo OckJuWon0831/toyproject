@@ -1,7 +1,7 @@
 ## ToyProjct - Game
 Grab the carrots but not the bugs!
 
-Vanila Javascript, HTML + CSS
+Vanila JavaScript, HTML + CSS
 
 ## Description
 
