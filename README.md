@@ -1,10 +1,10 @@
-### ToyProjct
+# ToyProjct
 
 ## Vanila Javascript, HTML + CSS
 
 ---
 
-16th ~ 21st March, 2023
+### 16th ~ 21st March, 2023
 
 1. When the Start! button is clicked, the game itself starts
 2. If the event listener listens the click event on the assets, depending if it is a carrot or bug, the score will be changed.
